@@ -16,6 +16,9 @@ module.exports = {
     contentBase: './dist',
     hot: true
   },
+  resolve: {
+    extensions: ['.js', '.jsx']
+  },
   module: {
     rules: [
       {

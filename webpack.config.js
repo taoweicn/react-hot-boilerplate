@@ -32,7 +32,13 @@ module.exports = {
         use: {
           loader: 'babel-loader',
           options: {
-            presets: ['latest', 'react']
+            presets: ['latest', 'react'],
+            //在开发的时候才启用HMR和Catch Error
+            env: {
+              development: {
+                presets: ['react-hmre']
+              }
+            }
           }
         }
       }
@@ -41,7 +47,6 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       title: 'My webpack demo'
-    }),
-    new webpack.HotModuleReplacementPlugin()
+    })
   ]
 }

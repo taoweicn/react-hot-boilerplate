@@ -1,14 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-function Hello() {
+function App() {
   return (
-    <div>
-      Hello World!
+    <div className="container">
+      <h1>Hello React!</h1>
     </div>
   );
 }
 
 const app = document.createElement('div');
 document.body.appendChild(app);
-ReactDOM.render(<Hello />, app);
+ReactDOM.render(<App />, app);

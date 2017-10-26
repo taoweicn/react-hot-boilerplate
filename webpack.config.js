@@ -11,7 +11,7 @@ module.exports = {
     filename: 'bundle.js'
   },
   devtool: 'inline-source-map',
-  //开启webpack dev server
+  // 开启webpack dev server
   devServer: {
     contentBase: './dist',
     hot: true
@@ -22,13 +22,21 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.css$/,
-        use: 'css-loader'
+        test: /\.scss$/,
+        use: [{
+          loader: 'style-loader'
+        }, {
+          loader: 'css-loader?modules'
+        }, {
+          loader: 'sass-loader'
+        }]
       },
       {
         test: /\.jsx$/,
-        enforce: "pre",
-        use: 'eslint-loader'
+        enforce: 'pre',
+        use: 'eslint-loader',
+        include: path.resolve(__dirname, './app'),
+        exclude: /node_modules/
       },
       {
         test: /\.jsx$/,
@@ -36,7 +44,7 @@ module.exports = {
           loader: 'babel-loader',
           options: {
             presets: ['env', 'react'],
-            //在开发的时候才启用HMR和Catch Error
+            // 在开发的时候才启用HMR和Catch Error
             env: {
               development: {
                 presets: ['react-hmre']
@@ -49,7 +57,7 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      title: 'My webpack demo'
+      title: 'Coding Girls Club'
     })
   ]
 }

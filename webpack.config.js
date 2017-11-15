@@ -57,7 +57,7 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      title: 'Coding Girls Club'
+      title: 'scaffold'
     })
   ]
-}
+};

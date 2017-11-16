@@ -26,7 +26,7 @@ module.exports = {
         use: [{
           loader: 'style-loader'
         }, {
-          loader: 'css-loader?modules'
+          loader: 'css-loader?modules&localIdentName=[name]__[local]___[hash:base64:5]'
         }, {
           loader: 'sass-loader'
         }]
@@ -43,13 +43,7 @@ module.exports = {
         use: {
           loader: 'babel-loader',
           options: {
-            presets: ['env', 'react'],
-            // 在开发的时候才启用HMR和Catch Error
-            env: {
-              development: {
-                presets: ['react-hmre']
-              }
-            }
+            presets: ['env', 'react']
           }
         }
       }

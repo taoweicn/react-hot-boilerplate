@@ -1,13 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-function App() {
-  return (
-    <div className="container">
+const App = () => (
+  <div className="container">
 
-    </div>
-  );
-}
+  </div>
+);
 
 const app = document.createElement('div');
 document.body.appendChild(app);

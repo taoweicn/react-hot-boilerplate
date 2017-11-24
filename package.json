@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "start": "webpack-dev-server --hot --open"
+    "start": "webpack-dev-server --open"
   },
   "repository": "https://github.com/taoweicn/react-hot-boilerplate.git",
   "author": "TaoWei",

@@ -1,11 +1,11 @@
 {
-  "name": "React Hot Loader Boilerplate",
+  "name": "react-hot-boilerplate",
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
     "start": "webpack-dev-server --hot --open"
   },
-  "repository": "https://github.com/taoweicn/webpack-react-config.git",
+  "repository": "https://github.com/taoweicn/react-hot-boilerplate.git",
   "author": "TaoWei",
   "license": "MIT",
   "devDependencies": {

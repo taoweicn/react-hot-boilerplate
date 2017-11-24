@@ -4,7 +4,10 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   entry: {
-    app: './app/app.jsx'
+    app: [
+      'react-hot-loader/patch',
+      './src/index.jsx'
+    ]
   },
   output: {
     path: path.resolve(__dirname, 'dist'),
@@ -34,24 +37,25 @@ module.exports = {
       {
         test: /\.jsx$/,
         enforce: 'pre',
-        use: 'eslint-loader',
-        include: path.resolve(__dirname, './app'),
+        use: {
+          loader: 'eslint-loader'
+        },
+        include: path.resolve(__dirname, './src'),
         exclude: /node_modules/
       },
       {
         test: /\.jsx$/,
         use: {
-          loader: 'babel-loader',
-          options: {
-            presets: ['env', 'react', 'stage-0']
-          }
+          loader: 'babel-loader'
         }
       }
     ]
   },
   plugins: [
     new HtmlWebpackPlugin({
-      title: 'scaffold'
-    })
+      title: 'App'
+    }),
+    new webpack.NamedModulesPlugin(),
+    new webpack.HotModuleReplacementPlugin()
   ]
 };

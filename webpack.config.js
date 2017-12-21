@@ -31,7 +31,7 @@ module.exports = {
         }, {
           loader: 'css-loader?modules&localIdentName=[name]__[local]___[hash:base64:5]'
         }, {
-          loader: 'sass-loader'
+          loader: 'postcss-loader'
         }]
       },
       {

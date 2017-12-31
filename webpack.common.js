@@ -1,7 +1,7 @@
 const path = require('path');
-const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const StyleLintPlugin = require('stylelint-webpack-plugin');
+const CleanWebpackPlugin = require('clean-webpack-plugin');
 
 module.exports = {
   entry: {
@@ -12,14 +12,7 @@ module.exports = {
   },
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: 'bundle.js'
-  },
-  devtool: 'inline-source-map',
-  // 开启webpack dev server
-  devServer: {
-    contentBase: './dist',
-    hot: true,
-    port: 8080
+    filename: '[name].bundle.js'
   },
   resolve: {
     extensions: ['.js', '.jsx']
@@ -91,10 +84,10 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      title: 'App'
+      title: 'App',
+      filename: 'index.html'
     }),
-    new webpack.NamedModulesPlugin(),
-    new webpack.HotModuleReplacementPlugin(),
-    new StyleLintPlugin()
+    new StyleLintPlugin(),
+    new CleanWebpackPlugin(['dist'])
   ]
 };

@@ -18,7 +18,8 @@ module.exports = {
   // 开启webpack dev server
   devServer: {
     contentBase: './dist',
-    hot: true
+    hot: true,
+    port: 8080
   },
   resolve: {
     extensions: ['.js', '.jsx']
@@ -26,28 +27,64 @@ module.exports = {
   module: {
     rules: [
       {
+        test: /\.css$/,
+        use: [{
+          loader: 'style-loader'
+        }, {
+          loader: 'css-loader'
+        }]
+      },
+      {
         test: /\.scss$/,
         use: [{
           loader: 'style-loader'
         }, {
-          loader: 'css-loader?modules&localIdentName=[name]__[local]___[hash:base64:5]'
+          loader: 'css-loader',
+          options: {
+            modules: true,
+            localIdentName: '[name]__[local]--[hash:base64:5]'
+          }
         }, {
           loader: 'postcss-loader'
+        }, {
+          loader: 'sass-loader'
         }]
       },
       {
-        test: /\.jsx$/,
         enforce: 'pre',
+        test: /\.jsx$/,
         use: {
           loader: 'eslint-loader'
         },
-        include: path.resolve(__dirname, './src'),
         exclude: /node_modules/
       },
       {
         test: /\.jsx$/,
         use: {
           loader: 'babel-loader'
+        },
+        exclude: /node_modules/
+      },
+      {
+        test: /\.(jp?eg|png|gif|svg|ico)$/,
+        use: {
+          loader: 'url-loader',
+          options: {
+            name: '[name]-[hash:base64:5].[ext]',
+            limit: 10000,
+            outputPath: 'images/'
+          }
+        }
+      },
+      {
+        test: /\.(ttf|eot|woff|woff2|otf)/,
+        use: {
+          loader: 'url-loader',
+          options: {
+            name: '[name]-[hash:base64:5].[ext]',
+            limit: 10000,
+            outputPath: 'fonts/'
+          }
         }
       }
     ]

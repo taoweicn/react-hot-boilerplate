@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "start": "webpack-dev-server --open --config webpack.dev.js",
-    "build": "webpack --config webpack.prod.js"
+    "start": "webpack-dev-server --open --config config/webpack.dev.js",
+    "build": "webpack --config config/webpack.prod.js"
   },
   "author": "TaoWei",
   "license": "MIT",
@@ -41,8 +41,8 @@
     "webpack-merge": "^4.1.1"
   },
   "dependencies": {
-    "react": "^16.1.1",
-    "react-dom": "^16.1.1",
+    "react": "*",
+    "react-dom": "*",
     "react-hot-loader": "^3.1.3"
   }
 }

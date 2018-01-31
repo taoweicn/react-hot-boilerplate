@@ -11,38 +11,13 @@ module.exports = {
     ]
   },
   output: {
-    path: path.resolve(__dirname, 'dist'),
-    filename: '[name].bundle.js'
+    path: path.resolve(__dirname, '../dist'),
   },
   resolve: {
     extensions: ['.js', '.jsx']
   },
   module: {
     rules: [
-      {
-        test: /\.css$/,
-        use: [{
-          loader: 'style-loader'
-        }, {
-          loader: 'css-loader'
-        }]
-      },
-      {
-        test: /\.scss$/,
-        use: [{
-          loader: 'style-loader'
-        }, {
-          loader: 'css-loader',
-          options: {
-            modules: true,
-            localIdentName: '[name]__[local]--[hash:base64:5]'
-          }
-        }, {
-          loader: 'postcss-loader'
-        }, {
-          loader: 'sass-loader'
-        }]
-      },
       {
         enforce: 'pre',
         test: /\.jsx$/,
@@ -63,7 +38,7 @@ module.exports = {
         use: {
           loader: 'url-loader',
           options: {
-            name: '[name]-[hash:base64:5].[ext]',
+            name: '[name].[hash:8].[ext]',
             limit: 10000,
             outputPath: 'images/'
           }
@@ -74,7 +49,7 @@ module.exports = {
         use: {
           loader: 'url-loader',
           options: {
-            name: '[name]-[hash:base64:5].[ext]',
+            name: '[name].[hash:8].[ext]',
             limit: 10000,
             outputPath: 'fonts/'
           }
@@ -88,6 +63,8 @@ module.exports = {
       filename: 'index.html'
     }),
     new StyleLintPlugin(),
-    new CleanWebpackPlugin(['dist'])
+    new CleanWebpackPlugin(['dist'], {
+      root: path.resolve(__dirname, '..')
+    })
   ]
 };

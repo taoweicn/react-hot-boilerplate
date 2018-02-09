@@ -6,7 +6,7 @@ module.exports = merge(common, {
   output: {
     filename: '[name].bundle.js'
   },
-  module:{
+  module: {
     rules: [
       {
         test: /\.css$/,
@@ -47,6 +47,6 @@ module.exports = merge(common, {
       'process.env': {
         NODE_ENV: JSON.stringify('development')
       }
-    }),
+    })
   ]
 });

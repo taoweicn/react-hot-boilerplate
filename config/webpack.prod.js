@@ -30,7 +30,8 @@ module.exports = merge(common, {
             loader: 'css-loader',
             options: {
               modules: true,
-              localIdentName: '[name]__[local]--[hash:base64:5]'
+              localIdentName: '[name]__[local]--[hash:base64:5]',
+              minimize: true
             }
           }, {
             loader: 'postcss-loader'

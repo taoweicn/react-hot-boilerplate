@@ -1,7 +1,7 @@
 {
   "name": "react-hot-boilerplate",
   "version": "1.0.0",
-  "main": "index.js",
+  "private": true,
   "scripts": {
     "start": "webpack-dev-server --open --config config/webpack.dev.js",
     "build": "webpack --config config/webpack.prod.js"

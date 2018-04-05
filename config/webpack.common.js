@@ -1,5 +1,4 @@
 const path = require('path');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
 const StyleLintPlugin = require('stylelint-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 
@@ -34,13 +33,13 @@ module.exports = {
         exclude: /node_modules/
       },
       {
-        test: /\.(jp?eg|png|gif|svg|ico)$/,
+        test: /\.(jpe?g|png|gif|svg|ico)$/,
         use: {
           loader: 'url-loader',
           options: {
             name: '[name].[hash:8].[ext]',
             limit: 10000,
-            outputPath: 'images/'
+            outputPath: 'static/images/'
           }
         }
       },
@@ -51,17 +50,13 @@ module.exports = {
           options: {
             name: '[name].[hash:8].[ext]',
             limit: 10000,
-            outputPath: 'fonts/'
+            outputPath: 'static/fonts/'
           }
         }
       }
     ]
   },
   plugins: [
-    new HtmlWebpackPlugin({
-      title: 'App',
-      filename: 'index.html'
-    }),
     new StyleLintPlugin(),
     new CleanWebpackPlugin(['dist'], {
       root: path.resolve(__dirname, '..')

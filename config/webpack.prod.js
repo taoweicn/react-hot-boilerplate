@@ -1,63 +1,63 @@
-const webpack = require('webpack');
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 const merge = require('webpack-merge');
 const common = require('./webpack.common');
 
 module.exports = merge(common, {
-  entry: {
-    vendor: ['react', 'react-dom']
-  },
   output: {
-    filename: '[name].[chunkhash:8].js'
+    filename: 'static/js/[name].[chunkhash:8].js'
   },
   module: {
     rules: [
       {
         test: /\.css$/,
-        use: ExtractTextPlugin.extract({
-          fallback: 'style-loader',
-          use: [{
-            loader: 'css-loader'
-          }]
-        })
+        use: [{
+          loader: MiniCssExtractPlugin.loader
+        }, {
+          loader: 'css-loader'
+        }]
       },
       {
         test: /\.scss$/,
-        use: ExtractTextPlugin.extract({
-          fallback: 'style-loader',
-          use: [{
-            loader: 'css-loader',
-            options: {
-              modules: true,
-              localIdentName: '[name]__[local]--[hash:base64:5]',
-              minimize: true
-            }
-          }, {
-            loader: 'postcss-loader'
-          }, {
-            loader: 'sass-loader'
-          }]
-        })
+        use: [{
+          loader: MiniCssExtractPlugin.loader
+        }, {
+          loader: 'css-loader',
+          options: {
+            modules: true,
+            localIdentName: '[hash:base64:5]',
+            minimize: true
+          }
+        }, {
+          loader: 'postcss-loader'
+        }, {
+          loader: 'sass-loader'
+        }]
       }
     ]
   },
+  optimization: {
+    splitChunks: {
+      chunks: 'all',
+      name: 'common'
+    },
+    runtimeChunk: {
+      name: 'runtime'
+    }
+  },
   devtool: 'source-map',
   plugins: [
-    new webpack.DefinePlugin({
-      'process.env': {
-        NODE_ENV: JSON.stringify('production')
+    new HtmlWebpackPlugin({
+      filename: 'index.html',
+      template: 'index.html',
+      minify: {
+        removeComments: true,
+        collapseWhitespace: true
       }
     }),
-    new UglifyJsPlugin({
-      sourceMap: true
-    }),
-    new ExtractTextPlugin('styles.[contenthash:8].css'),
-    new webpack.optimize.CommonsChunkPlugin({
-      name: 'vendor'
-    }),
-    new webpack.optimize.CommonsChunkPlugin({
-      name: 'runtime'
+    new MiniCssExtractPlugin({
+      filename: 'static/css/[name].[chunkhash:8].css',
+      chunkFilename: 'static/css/[id].[chunkhash:8].css'
     })
   ]
 });

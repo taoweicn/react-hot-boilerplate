@@ -1,5 +1,6 @@
 const webpack = require('webpack');
 const merge = require('webpack-merge');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 const common = require('./webpack.common');
 
 module.exports = merge(common, {
@@ -31,8 +32,8 @@ module.exports = merge(common, {
         }, {
           loader: 'sass-loader'
         }]
-      },
-    ],
+      }
+    ]
   },
   devtool: 'inline-source-map',
   devServer: {
@@ -41,12 +42,10 @@ module.exports = merge(common, {
     port: 8080
   },
   plugins: [
-    new webpack.NamedModulesPlugin(),
     new webpack.HotModuleReplacementPlugin(),
-    new webpack.DefinePlugin({
-      'process.env': {
-        NODE_ENV: JSON.stringify('development')
-      }
+    new HtmlWebpackPlugin({
+      filename: 'index.html',
+      template: 'index.html'
     })
   ]
 });

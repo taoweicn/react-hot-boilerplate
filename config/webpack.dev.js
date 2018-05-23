@@ -1,6 +1,9 @@
+const path = require('path');
 const webpack = require('webpack');
 const merge = require('webpack-merge');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const StyleLintPlugin = require('stylelint-webpack-plugin');
+const CleanWebpackPlugin = require('clean-webpack-plugin');
 const common = require('./webpack.common');
 
 module.exports = merge(common, {
@@ -45,8 +48,13 @@ module.exports = merge(common, {
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
     new HtmlWebpackPlugin({
+      title: 'Dev',
       filename: 'index.html',
       template: 'index.html'
-    })
+    }),
+    new CleanWebpackPlugin(['dist'], {
+      root: path.resolve(__dirname, '..')
+    }),
+    new StyleLintPlugin()
   ]
 });

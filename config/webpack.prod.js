@@ -49,6 +49,7 @@ module.exports = merge(common, {
   devtool: 'source-map',
   plugins: [
     new HtmlWebpackPlugin({
+      title: 'App',
       filename: 'index.html',
       template: 'index.html',
       minify: {

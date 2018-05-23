@@ -1,6 +1,4 @@
 const path = require('path');
-const StyleLintPlugin = require('stylelint-webpack-plugin');
-const CleanWebpackPlugin = require('clean-webpack-plugin');
 
 module.exports = {
   entry: {
@@ -10,7 +8,8 @@ module.exports = {
     ]
   },
   output: {
-    path: path.resolve(__dirname, '../dist')
+    path: path.resolve(__dirname, '../dist'),
+    publicPath: '/'
   },
   resolve: {
     extensions: ['.js', '.jsx']
@@ -55,11 +54,5 @@ module.exports = {
         }
       }
     ]
-  },
-  plugins: [
-    new StyleLintPlugin(),
-    new CleanWebpackPlugin(['dist'], {
-      root: path.resolve(__dirname, '..')
-    })
-  ]
+  }
 };

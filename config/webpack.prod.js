@@ -1,6 +1,9 @@
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
+const path = require('path');
 const merge = require('webpack-merge');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const StyleLintPlugin = require('stylelint-webpack-plugin');
+const CleanWebpackPlugin = require('clean-webpack-plugin');
 const common = require('./webpack.common');
 
 module.exports = merge(common, {
@@ -48,6 +51,9 @@ module.exports = merge(common, {
   },
   devtool: 'source-map',
   plugins: [
+    new CleanWebpackPlugin(['dist'], {
+      root: path.resolve(__dirname, '..')
+    }),
     new HtmlWebpackPlugin({
       title: 'App',
       filename: 'index.html',
@@ -57,6 +63,7 @@ module.exports = merge(common, {
         collapseWhitespace: true
       }
     }),
+    new StyleLintPlugin(),
     new MiniCssExtractPlugin({
       filename: 'static/css/[name].[chunkhash:8].css',
       chunkFilename: 'static/css/[id].[chunkhash:8].css'

@@ -21,7 +21,10 @@ module.exports = {
         enforce: 'pre',
         test: /\.jsx?$/,
         use: {
-          loader: 'eslint-loader'
+          loader: 'eslint-loader',
+          options: {
+            emitWarning: true
+          }
         },
         exclude: /node_modules/
       },

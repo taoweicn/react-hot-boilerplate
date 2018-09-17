@@ -2,6 +2,7 @@ const path = require('path');
 const webpack = require('webpack');
 const merge = require('webpack-merge');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const StyleLintPlugin = require('stylelint-webpack-plugin');
 const common = require('./webpack.common');
 
 module.exports = merge(common, {
@@ -12,6 +13,16 @@ module.exports = merge(common, {
   module: {
     rules: [
       {
+        enforce: 'pre',
+        test: /\.jsx?$/,
+        use: {
+          loader: 'eslint-loader',
+          options: {
+            emitWarning: true
+          }
+        },
+        exclude: /node_modules/
+      },      {
         test: /\.css$/,
         use: [{
           loader: 'style-loader'
@@ -49,6 +60,9 @@ module.exports = merge(common, {
       title: 'Dev',
       filename: 'index.html',
       template: 'index.html'
+    }),
+    new StyleLintPlugin({
+      emitErrors: false
     })
   ]
 });

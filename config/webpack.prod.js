@@ -2,7 +2,6 @@ const path = require('path');
 const merge = require('webpack-merge');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const StyleLintPlugin = require('stylelint-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const common = require('./webpack.common');
 
@@ -63,7 +62,6 @@ module.exports = merge(common, {
         collapseWhitespace: true
       }
     }),
-    new StyleLintPlugin(),
     new MiniCssExtractPlugin({
       filename: 'static/css/[name].[chunkhash:8].css',
       chunkFilename: 'static/css/[id].[chunkhash:8].css'

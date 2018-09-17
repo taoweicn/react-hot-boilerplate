@@ -6,6 +6,7 @@
     "start": "webpack-dev-server --config config/webpack.dev.js --open",
     "dev": "webpack-dev-server --config config/webpack.dev.js",
     "build": "webpack --config config/webpack.prod.js",
+    "analyze": "webpack --config config/webpack.prod.js --profile --json > stats.json && webpack-bundle-analyzer ./stats.json",
     "lint:js": "prettier-eslint --write src/**/*.js*",
     "lint:css": "stylelint src/**/*.*css --fix",
     "format": "run-p lint:*"
@@ -48,6 +49,7 @@
     "stylelint-webpack-plugin": "^0.10.5",
     "url-loader": "^1.1.1",
     "webpack": "^4.17.2",
+    "webpack-bundle-analyzer": "^3.0.2",
     "webpack-cli": "^3.1.0",
     "webpack-dev-server": "^3.1.7",
     "webpack-merge": "^4.1.4"

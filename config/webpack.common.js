@@ -18,17 +18,6 @@ module.exports = {
   module: {
     rules: [
       {
-        enforce: 'pre',
-        test: /\.jsx?$/,
-        use: {
-          loader: 'eslint-loader',
-          options: {
-            emitWarning: true
-          }
-        },
-        exclude: /node_modules/
-      },
-      {
         test: /\.jsx?$/,
         use: {
           loader: 'babel-loader'

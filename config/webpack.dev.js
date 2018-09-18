@@ -1,14 +1,17 @@
-const path = require('path');
+/* eslint-disable import/no-extraneous-dependencies */
+
 const webpack = require('webpack');
 const merge = require('webpack-merge');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const StyleLintPlugin = require('stylelint-webpack-plugin');
 const common = require('./webpack.common');
+const config = require('./config');
 
 module.exports = merge(common, {
   mode: 'development',
   output: {
-    filename: '[name].bundle.js'
+    filename: '[name].bundle.js',
+    publicPath: config.dev.publicPath
   },
   module: {
     rules: [
@@ -22,7 +25,7 @@ module.exports = merge(common, {
           }
         },
         exclude: /node_modules/
-      },      {
+      }, {
         test: /\.css$/,
         use: [{
           loader: 'style-loader'
@@ -48,18 +51,17 @@ module.exports = merge(common, {
       }
     ]
   },
-  devtool: 'inline-source-map',
+  devtool: config.dev.devtool,
   devServer: {
-    contentBase: path.resolve(__dirname, '../static'),
+    contentBase: false, // for CopyWebpackPlugin.
     hot: true,
-    port: 8080
+    port: config.dev.port,
+    proxy: config.dev.proxy
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
     new HtmlWebpackPlugin({
-      title: 'Dev',
-      filename: 'index.html',
-      template: 'index.html'
+      ...config.common.htmlConfig
     }),
     new StyleLintPlugin({
       emitErrors: false

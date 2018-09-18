@@ -1,5 +1,8 @@
-const path = require('path');
+/* eslint-disable import/no-extraneous-dependencies */
+
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+const config = require('./config');
+const { resolve } = require('./utils');
 
 module.exports = {
   entry: {
@@ -9,7 +12,7 @@ module.exports = {
     ]
   },
   output: {
-    path: path.resolve(__dirname, '../dist'),
+    path: resolve(config.prod.outputPath),
     publicPath: '/'
   },
   resolve: {
@@ -50,8 +53,8 @@ module.exports = {
   },
   plugins: [
     new CopyWebpackPlugin([{
-      from: path.resolve(__dirname, '../static'),
-      to: path.resolve(__dirname, '../dist/static'),
+      from: resolve('static'),
+      to: resolve(config.prod.outputPath, 'static'),
       ignore: ['.*']
     }])
   ]

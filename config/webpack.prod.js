@@ -1,14 +1,18 @@
-const path = require('path');
+/* eslint-disable import/no-extraneous-dependencies */
+
 const merge = require('webpack-merge');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const common = require('./webpack.common');
+const config = require('./config');
+const { resolve } = require('./utils');
 
 module.exports = merge(common, {
   mode: 'production',
   output: {
-    filename: 'static/js/[name].[chunkhash:8].js'
+    filename: 'static/js/[name].[chunkhash:8].js',
+    publicPath: config.prod.publicPath
   },
   module: {
     rules: [
@@ -48,15 +52,13 @@ module.exports = merge(common, {
       name: 'runtime'
     }
   },
-  devtool: 'source-map',
+  devtool: config.prod.devtool,
   plugins: [
-    new CleanWebpackPlugin(['dist'], {
-      root: path.resolve(__dirname, '..')
+    new CleanWebpackPlugin([config.prod.outputPath], {
+      root: resolve()
     }),
     new HtmlWebpackPlugin({
-      title: 'App',
-      filename: 'index.html',
-      template: 'index.html',
+      ...config.common.htmlConfig,
       minify: {
         removeComments: true,
         collapseWhitespace: true

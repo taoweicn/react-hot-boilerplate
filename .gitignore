@@ -16,3 +16,6 @@ yarn-error.log*
 
 # Webpack stats file
 stats.json
+
+# Mac OS configure file
+.DS_Store

@@ -20,9 +20,7 @@ render(App);
 // Webpack Hot Module Replacement API
 if (module.hot) {
   module.hot.accept('./App', () => {
-    /* eslint-disable */
-    const nextApp = require('./App');
-    /* eslint-enable */
+    const nextApp = require('./App'); // eslint-disable-line
     render(nextApp.default);
   });
 }

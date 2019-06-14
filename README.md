@@ -1,6 +1,7 @@
-# 基于webpack的React脚手架
+# 基于 webpack 的 React 脚手架
 
 ## 主要功能
+
 - 静态资源打包
 - 代码编译压缩
 - 模块热更新
@@ -8,11 +9,13 @@
 - ……
 
 ## 技术栈
+
 - React
 - PostCSS
 - Sass
 
 ## 代码质量
+
 - Eslint
 - Stylelint
 - Prettier

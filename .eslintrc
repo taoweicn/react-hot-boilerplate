@@ -1,16 +1,20 @@
 {
   "parser": "babel-eslint",
-  "extends": [
-    "airbnb"
-  ],
-  "rules": {
-    "comma-dangle": ["error", "never"]
-//    "linebreak-style": ["error", "windows"]
-  },
+  "extends": ["airbnb"],
+  "plugins": ["react", "react-hooks"],
   "env": {
     "browser": true
   },
-  "plugins": [
-    "react"
-  ]
+  "settings": {
+    "import/resolver": {
+      "webpack": {
+        "config": "config/webpack.common.js"
+      }
+    }
+  },
+  "rules": {
+    "comma-dangle": ["error", "never"],
+    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": "warn"
+  }
 }

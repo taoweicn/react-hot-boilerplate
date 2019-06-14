@@ -3,44 +3,56 @@
 const merge = require('webpack-merge');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const CleanWebpackPlugin = require('clean-webpack-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const common = require('./webpack.common');
 const config = require('./config');
-const { resolve } = require('./utils');
+const { assetsPath } = require('./utils');
 
 module.exports = merge(common, {
   mode: 'production',
   output: {
-    filename: 'static/js/[name].[chunkhash:8].js',
+    filename: assetsPath('js/[name].[chunkhash:8].js'),
     publicPath: config.prod.publicPath
   },
   module: {
     rules: [
       {
         test: /\.css$/,
-        use: [{
-          loader: MiniCssExtractPlugin.loader
-        }, {
-          loader: 'css-loader'
-        }, {
-          loader: 'postcss-loader'
-        }]
+        use: [
+          {
+            loader: MiniCssExtractPlugin.loader
+          },
+          {
+            loader: 'css-loader'
+          },
+          {
+            loader: 'postcss-loader'
+          }
+        ]
       },
       {
         test: /\.scss$/,
-        use: [{
-          loader: MiniCssExtractPlugin.loader
-        }, {
-          loader: 'css-loader',
-          options: {
-            modules: true,
-            localIdentName: '[hash:base64:5]'
+        use: [
+          {
+            loader: MiniCssExtractPlugin.loader
+          },
+          {
+            loader: 'css-loader',
+            options: {
+              modules: {
+                mode: 'local',
+                localIdentName: '[hash:base64:5]'
+              },
+              localsConvention: 'dashesOnly'
+            }
+          },
+          {
+            loader: 'postcss-loader'
+          },
+          {
+            loader: 'sass-loader'
           }
-        }, {
-          loader: 'postcss-loader'
-        }, {
-          loader: 'sass-loader'
-        }]
+        ]
       }
     ]
   },
@@ -55,9 +67,7 @@ module.exports = merge(common, {
   },
   devtool: config.prod.devtool,
   plugins: [
-    new CleanWebpackPlugin([config.prod.outputPath], {
-      root: resolve()
-    }),
+    new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
       ...config.common.htmlConfig,
       minify: {
@@ -66,8 +76,8 @@ module.exports = merge(common, {
       }
     }),
     new MiniCssExtractPlugin({
-      filename: 'static/css/[name].[chunkhash:8].css',
-      chunkFilename: 'static/css/[id].[chunkhash:8].css'
+      filename: assetsPath('css/[name].[chunkhash:8].css'),
+      chunkFilename: assetsPath('css/[id].[chunkhash:8].css')
     })
   ]
 });

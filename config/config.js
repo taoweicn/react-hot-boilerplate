@@ -1,5 +1,15 @@
+const path = require('path');
+
+function resolve(dir) {
+  return path.join(__dirname, '..', dir);
+}
+
 module.exports = {
   common: {
+    assetsSubDirectory: 'static',
+    alias: {
+      '@': resolve('src')
+    },
     htmlConfig: {
       title: 'App',
       template: 'index.html',

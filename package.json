@@ -8,7 +8,7 @@
     "build": "webpack --config config/webpack.prod.js",
     "analyze": "webpack --config config/webpack.prod.js --profile --json > stats.json && webpack-bundle-analyzer ./stats.json",
     "lint:js": "prettier-eslint --write src/**/*.js*",
-    "lint:css": "stylelint src/**/*.*css --fix",
+    "lint:css": "prettier-stylelint --write src/**/*.*css",
     "format": "run-p lint:*"
   },
   "author": "Tao Wei",
@@ -41,6 +41,7 @@
     "postcss-loader": "^3.0.0",
     "prettier": "^1.18.2",
     "prettier-eslint-cli": "^4.7.1",
+    "prettier-stylelint": "^0.4.2",
     "sass-loader": "^7.1.0",
     "style-loader": "^0.23.1",
     "stylelint": "^10.1.0",

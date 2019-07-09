@@ -8,6 +8,9 @@ module.exports = {
   entry: {
     app: ['react-hot-loader/patch', './src/index.jsx']
   },
+  output: {
+    path: resolve(config.common.outputPath)
+  },
   resolve: {
     extensions: ['.js', '.jsx'],
     alias: Object.assign(
@@ -63,7 +66,7 @@ module.exports = {
     new CopyWebpackPlugin([
       {
         from: resolve('static'),
-        to: resolve(config.prod.outputPath, 'static'),
+        to: resolve(config.common.outputPath, assetsPath()),
         ignore: ['.*']
       }
     ])

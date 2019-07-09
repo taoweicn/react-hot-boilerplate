@@ -6,6 +6,7 @@ function resolve(dir) {
 
 module.exports = {
   common: {
+    outputPath: 'dist',
     assetsSubDirectory: 'static',
     alias: {
       '@': resolve('src')
@@ -25,7 +26,6 @@ module.exports = {
   },
   prod: {
     publicPath: '/',
-    devtool: 'source-map',
-    outputPath: 'dist'
+    devtool: 'source-map'
   }
 };

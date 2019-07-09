@@ -6,6 +6,7 @@
   "extends": [
     "stylelint-config-standard",
     "stylelint-config-recommended-scss",
-    "stylelint-config-recess-order"
+    "stylelint-config-recess-order",
+    "./node_modules/prettier-stylelint/config.js"
   ]
 }
